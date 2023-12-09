@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = $_POST['message'];
 
     // Set a character limit (adjust as needed)
-    $characterLimit = 500;
+    $characterLimit = 500000;
 
     // Truncate the message if it exceeds the character limit
     $truncatedMessage = mb_substr($message, 0, $characterLimit, 'UTF-8');
