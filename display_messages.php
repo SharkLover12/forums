@@ -84,7 +84,13 @@ $allowedTags = '<a><b><i><u><img><br><p><div><span><ul><ol><li>';
                 // Display the image if available
                 if (count($messageParts) == 3) {
                     $imagePath = trim($messageParts[2]);
-                    echo '<img src="' . $imagePath . '" alt="Uploaded Image">';
+
+                    // Validate and sanitize the image URL
+                    if (filter_var($imagePath, FILTER_VALIDATE_URL) && strpos($imagePath, 'yourdomain.com') !== false) {
+                        echo '<img src="' . $imagePath . '" alt="Uploaded Image">';
+                    } else {
+                        echo '<p>Invalid image URL</p>';
+                    }
                 }
 
                 echo '</div>';
