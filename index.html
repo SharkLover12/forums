@@ -1,10 +1,9 @@
-<title>Message Board</title>
-<meta content="Embed Title" property="og:title" />
-<meta content="mr message board" property="og:description" />
-<meta content="http://96.245.1.208/" property="og:url" />
-<meta content="http://96.245.1.208/embedimage.png" property="og:image" />
-<meta content="#43B581" data-react-helmet="true" name="theme-color" />
 <!DOCTYPE html>
+<meta content="It's a random ass forum." property="og:title" />
+<meta content="Forum" property="og:description" />
+<meta content="https://retardation.xyz/" property="og:url" />
+<meta content="https://retardation.xyz/embedimage.png" property="og:image" />
+<meta content="#43B581" data-react-helmet="true" name="theme-color" />
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,7 +39,9 @@
             color: #adb5bd;
         }
 
-        textarea, input[type="text"] {
+        textarea,
+        input[type="text"],
+        input[type="file"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #61dafb;
@@ -51,7 +52,8 @@
             color: #e9ecef;
         }
 
-        input[type="submit"], button {
+        input[type="submit"],
+        button {
             background-color: #61dafb;
             color: #fff;
             padding: 10px 15px;
@@ -62,8 +64,9 @@
             margin-right: 10px;
         }
 
-        input[type="submit"]:hover, button:hover {
-            background-color: #0d6efd;	
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #0d6efd;
         }
 
         button {
@@ -77,23 +80,37 @@
         button.view-messages:hover {
             background-color: #d39e00;
         }
+
+        .uploaded-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>Message Board</h1>
 
     <div>
-        <form action="post_message.php" method="post">
+        <form action="post_message.php" method="post" enctype="multipart/form-data">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
             <label for="message">Message:</label>
             <textarea id="message" name="message" rows="4" required></textarea>
 
+            <label for="image">Upload Image:</label>
+            <input type="file" id="image" name="image">
+
             <input type="submit" value="Post Message">
         </form>
 
         <button class="view-messages" onclick="window.location.href='display_messages.php'">View Messages</button>
+
+        <!-- Display uploaded image -->
+        <?php if (isset($targetFile)) : ?>
+            <img src="<?php echo $targetFile; ?>" alt="Uploaded Image" class="uploaded-image">
+        <?php endif; ?>
     </div>
 </body>
 </html>
