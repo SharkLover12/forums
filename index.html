@@ -1,116 +1,116 @@
 <!DOCTYPE html>
-<meta content="It's a random ass forum." property="og:title" />
-<meta content="Forum" property="og:description" />
-<meta content="https://retardation.xyz/" property="og:url" />
-<meta content="https://retardation.xyz/embedimage.png" property="og:image" />
-<meta content="#43B581" data-react-helmet="true" name="theme-color" />
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message Board</title>
+    <title>Galaxy Background</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background-color: #343a40;
-            color: #e9ecef;
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
-
-        h1 {
-            border-bottom: 2px solid #61dafb;
-            padding-bottom: 10px;
-            color: #61dafb;
-            text-align: center;
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
-
-        form {
-            border: 2px solid #61dafb;
+        .rules {
+            background: rgba(0, 0, 0, 0.85);
             padding: 20px;
-            margin-bottom: 20px;
-            background-color: #454d55;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
-
-        label {
-            display: block;
-            margin: 10px 0;
-            color: #adb5bd;
+        .rules h2 {
+            margin: 0 0 15px;
+            font-size: 24px;
+            text-transform: uppercase;
         }
-
-        textarea,
-        input[type="text"],
-        input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #61dafb;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            resize: vertical;
-            background-color: #343a40;
-            color: #e9ecef;
+        .rules ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-
-        input[type="submit"],
-        button {
-            background-color: #61dafb;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-right: 10px;
-        }
-
-        input[type="submit"]:hover,
-        button:hover {
-            background-color: #0d6efd;
-        }
-
-        button {
-            background-color: #28a745;
-        }
-
-        button.view-messages {
-            background-color: #ffc107;
-        }
-
-        button.view-messages:hover {
-            background-color: #d39e00;
-        }
-
-        .uploaded-image {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
+        .rules li {
+            margin-bottom: 8px;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <h1>Message Board</h1>
-
-    <div>
-        <form action="post_message.php" method="post" enctype="multipart/form-data">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <label for="image">Upload Image:</label>
-            <input type="file" id="image" name="image">
-
-            <input type="submit" value="Post Message">
-        </form>
-
-        <button class="view-messages" onclick="window.location.href='display_messages.php'">View Messages</button>
-
-        <!-- Display uploaded image -->
-        <?php if (isset($targetFile)) : ?>
-            <img src="<?php echo $targetFile; ?>" alt="Uploaded Image" class="uploaded-image">
-        <?php endif; ?>
+    <canvas id="galaxyCanvas"></canvas>
+    <div class="rules">
+        <h2>Server Rules</h2>
+        <ul>
+            <li>Be respectful</li>
+            <li>No ban evading</li>
+            <li>No spamming props</li>
+            <li>No repeated RDM</li>
+            <li>No admin disrespect</li>
+            <li>Do not abuse build-mode</li>
+            <li>No constant propkilling</li>
+            <li>No bullying of other users</li>
+            <li>No trying to crash the server</li>
+            <li>If people are building, do not disturb them</li>
+            <li>Anything admins say is final, no wiggle room</li>
+            <li>Do not use aimbot, ESP, or any other hack on the server</li>
+            <li>No threatening to DDoS or dox other people on the server</li>
+        </ul>
     </div>
+    <script>
+        const canvas = document.getElementById("galaxyCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const stars = [];
+        const numStars = 300;
+        
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2,
+                speed: Math.random() * 0.5 + 0.1
+            });
+        }
+        
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            let gradient = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, 100, canvas.width / 2, canvas.height / 2, canvas.width / 2);
+            gradient.addColorStop(0, "rgba(20, 20, 50, 1)");
+            gradient.addColorStop(1, "rgba(0, 0, 0, 0.5)");
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = "white";
+                ctx.fill();
+                ctx.closePath();
+                
+                star.radius = Math.random() * 2;
+                star.x += star.speed;
+                if (star.x > canvas.width) {
+                    star.x = 0;
+                    star.y = Math.random() * canvas.height;
+                }
+            });
+            requestAnimationFrame(drawStars);
+        }
+        
+        drawStars();
+    </script>
 </body>
 </html>
